@@ -3,9 +3,13 @@ package dev.pohsienhsu.movies.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.bson.codecs.jsr310.LocalTimeCodec;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Document(collection="reviews")
 @Data
@@ -14,4 +18,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Review {
     @Id
     private ObjectId id;
+    private String body;
+    private LocalDateTime created;
+    private LocalDateTime updated;
+
+    public Review(String body) {
+        this.body = body;
+        this.created = LocalDateTime.now();
+        this.updated = LocalDateTime.now();
+    }
 }
