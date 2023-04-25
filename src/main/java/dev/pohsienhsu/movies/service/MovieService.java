@@ -19,13 +19,13 @@ public class MovieService {
         return this.movieRepository.findAll();
     }
 
-    public Movie MovieById(ObjectId id) {
-        Optional<Movie> result = this.movieRepository.findById(id);
+    public Movie MovieByImdbId(String imdbId) {
+        Optional<Movie> result = this.movieRepository.findMovieByImdbId(imdbId);
         Movie movie;
         if (result.isPresent()) {
             movie = result.get();
         } else {
-            throw new RuntimeException("can't find movie with id: " + id);
+            throw new RuntimeException("can't find movie with id: " + imdbId);
         }
         return movie;
     }
